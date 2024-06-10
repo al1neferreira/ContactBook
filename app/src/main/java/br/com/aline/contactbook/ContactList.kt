@@ -20,11 +20,16 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,33 +39,74 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.aline.contactbook.ui.theme.NewPink
 import br.com.aline.contactbook.ui.theme.NewPurple
+import br.com.aline.contactbook.ui.theme.Purple40
+import br.com.aline.contactbook.ui.theme.Purple80
+import br.com.aline.contactbook.ui.theme.PurpleGrey40
+import br.com.aline.contactbook.ui.theme.PurpleGrey80
 import com.google.firebase.Firebase
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ContactListPage() {
+fun ContactList(navController: NavController) {
     val contactList = getFakeList()
 
     Firebase
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                modifier = Modifier.padding(bottom = 20.dp),
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.Transparent
+                ),
+                title = {
+                    Text(
+                        text = "Lista de Contatos",
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Purple40
+                    )
+                })
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                          navController.navigate("addContact")
+                },
+                shape = CircleShape,
+                modifier = Modifier.padding(5.dp)
+            ) {
+                Icon(Icons.Filled.Add, "Float Action Button")
+            }
+        }
+    ) {
+
+
+    }
 
     Column(
         modifier = Modifier
             .fillMaxHeight()
             .padding(8.dp)
+            .padding(top = 70.dp)
 
 
     ) {
 
         Card(
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
+                containerColor = Color.Transparent
             ), modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp)
         ) {
             LazyColumn(
@@ -71,16 +117,6 @@ fun ContactListPage() {
                 }
             )
         }
-
-        FloatingActionButton(
-            modifier = Modifier.padding(20.dp).align(Alignment.End),
-            contentColor = NewPurple,
-            onClick = {  },
-            shape = CircleShape,
-        ) {
-            Icon(Icons.Filled.Add, "Floating action button.")
-        }
-
     }
 }
 
@@ -94,10 +130,9 @@ fun ContactItem(item: Contacts) {
             .fillMaxWidth()
             .padding(8.dp)
             .clip(RoundedCornerShape(10.dp))
-            .background(color = NewPink)
+            .background(color = NewPurple)
             .animateContentSize(),
         verticalAlignment = Alignment.CenterVertically
-
 
 
     ) {
@@ -133,7 +168,8 @@ fun ContactItem(item: Contacts) {
                 )
                 Text(
                     text = SimpleDateFormat(
-                        "EEE, d MMM yyyy - HH:mm", Locale.ENGLISH)
+                        "EEE, d MMM yyyy - HH:mm", Locale.ENGLISH
+                    )
                         .format(item.createdAt),
                     Modifier.padding(2.dp),
                     color = Color.Black

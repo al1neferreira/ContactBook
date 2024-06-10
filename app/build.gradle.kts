@@ -57,6 +57,7 @@ dependencies {
 
     val room_version = "2.6.1"
     val lifecycle_version = "2.8.1"
+    val nav_version = "2.7.7"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -83,6 +84,7 @@ dependencies {
 
     //Compose
     implementation("androidx.compose.ui:ui:1.6.7")
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     //Compose Material 3
     implementation("androidx.compose.material3:material3:1.2.1")
