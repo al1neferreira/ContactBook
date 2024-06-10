@@ -29,13 +29,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import java.time.LocalDateTime
 import java.util.Calendar
 import java.util.Date
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AddContactScreen() {
+fun AddContact(navController: NavController) {
     var contactName by rememberSaveable { mutableStateOf("") }
     var contactCPF by rememberSaveable { mutableStateOf("") }
     var savedAt by rememberSaveable { mutableStateOf(LocalDateTime.now()) }
