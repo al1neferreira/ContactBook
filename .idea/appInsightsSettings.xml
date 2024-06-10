@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="br.com.aline.contactbook" />
+                  <option name="mobileSdkAppId" value="1:111140605698:android:6284f4b1409d66d28c3c1b" />
+                  <option name="projectId" value="contactbook-3b568" />
+                  <option name="projectNumber" value="111140605698" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
