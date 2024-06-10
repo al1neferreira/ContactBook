@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "111140605698",
+    "firebase_url": "https://contactbook-3b568-default-rtdb.firebaseio.com",
+    "project_id": "contactbook-3b568",
+    "storage_bucket": "contactbook-3b568.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111140605698:android:6284f4b1409d66d28c3c1b",
+        "android_client_info": {
+          "package_name": "br.com.aline.contactbook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNLwEqjRorrqK_kSlsIQkH45sx3pNgMzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,12 +12,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,7 +36,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.aline.contactbook.ui.theme.PurpleGrey40
+import br.com.aline.contactbook.ui.theme.NewPink
+import br.com.aline.contactbook.ui.theme.NewPurple
+import com.google.firebase.Firebase
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -43,6 +48,8 @@ import java.util.Locale
 fun ContactListPage() {
     val contactList = getFakeList()
 
+    Firebase
+
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -50,6 +57,7 @@ fun ContactListPage() {
 
 
     ) {
+
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -62,6 +70,15 @@ fun ContactListPage() {
                     }
                 }
             )
+        }
+
+        FloatingActionButton(
+            modifier = Modifier.padding(20.dp).align(Alignment.End),
+            contentColor = NewPurple,
+            onClick = {  },
+            shape = CircleShape,
+        ) {
+            Icon(Icons.Filled.Add, "Floating action button.")
         }
 
     }
@@ -77,7 +94,7 @@ fun ContactItem(item: Contacts) {
             .fillMaxWidth()
             .padding(8.dp)
             .clip(RoundedCornerShape(10.dp))
-            .background(color = PurpleGrey40)
+            .background(color = NewPink)
             .animateContentSize(),
         verticalAlignment = Alignment.CenterVertically
 
