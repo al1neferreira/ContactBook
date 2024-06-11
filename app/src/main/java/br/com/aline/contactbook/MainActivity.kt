@@ -6,14 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.aline.contactbook.ui.theme.ContactBookTheme
-import java.lang.reflect.Modifier
+import br.com.aline.contactbook.view.ContactList
+import br.com.aline.contactbook.view.SaveContact
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -32,9 +30,9 @@ class MainActivity : ComponentActivity() {
                         ContactList(navController)
                     }
                     composable(
-                        route = "addContact"
+                        route = "saveContact"
                     ) {
-                        AddContact(navController)
+                        SaveContact(navController)
                     }
                 }
             }
