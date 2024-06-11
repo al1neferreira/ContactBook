@@ -94,6 +94,7 @@ dependencies {
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
