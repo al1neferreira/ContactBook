@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,18 +27,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
 import br.com.aline.contactbook.ui.theme.ShapeEditText
 import br.com.aline.contactbook.utils.Form
+import br.com.aline.contactbook.viewModel.ContactsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
+@OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SaveContact(navController: NavController) {
+fun SaveContact(
+    navController: NavController,
+    viewModel: ContactsViewModel = viewModel()
+) {
 
     var name by remember { mutableStateOf("") }
     var cpf by remember { mutableStateOf("") }
@@ -48,7 +55,7 @@ fun SaveContact(navController: NavController) {
 
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val contactsRepository = ContactsRepository()
+
 
 
     Column(
@@ -93,7 +100,7 @@ fun SaveContact(navController: NavController) {
             keyboardType = KeyboardType.Number,
 
 
-        )
+            )
         Form(
             value = phone,
             onValueChange = {
@@ -130,7 +137,7 @@ fun SaveContact(navController: NavController) {
             maxLines = 1,
             keyboardType = KeyboardType.Number,
 
-        )
+            )
 
         //DatePickerBirthDate()
 
@@ -144,20 +151,18 @@ fun SaveContact(navController: NavController) {
                     if (name.isEmpty()
                         && phone.isEmpty()
                         && uf.isEmpty()
-                        &&birthDate.isEmpty()
+                        && birthDate.isEmpty()
                     ) {
                         message = false
 
-                    }
-
-                    else if (
+                    } else if (
                         name.isNotEmpty()
                         && cpf.isNotEmpty()
                         && phone.isNotEmpty()
                         && birthDate.isNotEmpty()
                         && uf.isNotEmpty()
                     ) {
-                        contactsRepository.addContact(
+                        viewModel.addContact(
                             name, cpf, phone.toString(),
                             birthDate.toString(),
                             uf, savedAt
