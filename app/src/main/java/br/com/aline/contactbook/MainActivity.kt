@@ -12,11 +12,16 @@ import androidx.navigation.compose.rememberNavController
 import br.com.aline.contactbook.ui.theme.ContactBookTheme
 import br.com.aline.contactbook.view.ContactList
 import br.com.aline.contactbook.view.SaveContact
+import com.google.firebase.BuildConfig
 
 class MainActivity : ComponentActivity() {
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val apiKey = br.com.aline.contactbook.BuildConfig.apiKey
+
         enableEdgeToEdge()
         setContent {
             ContactBookTheme {
