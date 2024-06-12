@@ -12,11 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
@@ -44,27 +42,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.aline.contactbook.model.Contacts
-import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
+import br.com.aline.contactbook.viewModel.ContactsViewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ContactList(navController: NavController) {
+fun ContactList(
+    navController: NavController,
+    viewModel: ContactsViewModel = viewModel()
+) {
 
-    val contactsRepository = ContactsRepository()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                modifier = Modifier.padding(bottom = 30.dp, top = 20.dp, start= 10.dp),
+                modifier = Modifier.padding(bottom = 30.dp, top = 20.dp, start = 10.dp),
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color.Transparent
                 ),
@@ -100,7 +103,6 @@ fun ContactList(navController: NavController) {
             .padding(top = 90.dp)
 
 
-
     ) {
 
         Card(
@@ -109,14 +111,12 @@ fun ContactList(navController: NavController) {
             ), modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp)
         ) {
 
-            val contactList = contactsRepository.getContacts().collectAsState(mutableListOf()).value
+            val contactList = viewModel.getContacts().collectAsState(mutableListOf()).value
+            val context = LocalContext.current
             LazyColumn {
-                itemsIndexed(contactList) { index: Int, item: Contacts ->
-                    ContactItem(item = item)
-
-
+                items(contactList) {
+                    ContactItem(it)
                 }
-
             }
         }
     }
@@ -124,11 +124,11 @@ fun ContactList(navController: NavController) {
 
 
 @Composable
-fun ContactItem(item: Contacts) {
+fun ContactItem(
+    item: Contacts
+) {
 
     var expandedCard by remember { mutableStateOf(false) }
-    
-
 
     Row(
         modifier = Modifier
@@ -212,9 +212,11 @@ fun ContactItem(item: Contacts) {
 
                 }
                 IconButton(onClick = { /*TODO*/ }) {
-                    Icon(Icons.Filled.Delete,
+                    Icon(
+                        Icons.Filled.Delete,
                         "Delete Contact",
-                        tint = Color.White)
+                        tint = Color.White
+                    )
 
                 }
 
@@ -223,3 +225,6 @@ fun ContactItem(item: Contacts) {
         }
     }
 }
+
+
+
