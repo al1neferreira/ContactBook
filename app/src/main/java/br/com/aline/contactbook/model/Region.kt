@@ -1,4 +1,4 @@
-package br.com.aline.contactbook
+package br.com.aline.contactbook.model
 
 enum class Region {
     RO,
