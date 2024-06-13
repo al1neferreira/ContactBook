@@ -2,7 +2,6 @@ package br.com.aline.contactbook.data
 
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.ViewModel
 import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.viewModel.ContactsViewModel
 import com.google.firebase.firestore.FirebaseFirestore

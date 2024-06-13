@@ -1,9 +1,7 @@
 package br.com.aline.contactbook.repository
 
-import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.aline.contactbook.data.DataSource
 import br.com.aline.contactbook.model.Contacts
-import br.com.aline.contactbook.viewModel.ContactsViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
