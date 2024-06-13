@@ -48,14 +48,10 @@ class ContactsViewModel @Inject constructor(
             contactsRepository.getContacts().collect {
 
                 _allContacts.value = it
-
-
             }
-
         }
 
         return allContats
-
     }
 
     fun deleteContact(name: String) {

@@ -47,7 +47,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.aline.contactbook.model.Contacts
 import br.com.aline.contactbook.ui.theme.NewPurple
@@ -60,7 +59,7 @@ import br.com.aline.contactbook.viewModel.ContactsViewModel
 @Composable
 fun ContactList(
     navController: NavController,
-    viewModel: ContactsViewModel = viewModel()
+    viewModel: ContactsViewModel = hiltViewModel()
 ) {
 
 
