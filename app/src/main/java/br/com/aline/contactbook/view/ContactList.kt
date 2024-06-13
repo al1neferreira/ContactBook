@@ -60,7 +60,7 @@ import br.com.aline.contactbook.viewModel.ContactsViewModel
 @Composable
 fun ContactList(
     navController: NavController,
-    viewModel: ContactsViewModel = viewModel()
+    viewModel: ContactsViewModel = hiltViewModel()
 ) {
 
 

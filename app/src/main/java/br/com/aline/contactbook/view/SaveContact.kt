@@ -43,7 +43,7 @@ import java.time.LocalDateTime
 @Composable
 fun SaveContact(
     navController: NavController,
-    viewModel: ContactsViewModel = viewModel()
+    viewModel: ContactsViewModel = hiltViewModel()
 ) {
 
     var name by remember { mutableStateOf("") }

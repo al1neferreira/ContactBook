@@ -45,5 +45,4 @@ class ContactsRepository @Inject constructor(private val dataSource: DataSource)
 
     }
 
-
 }

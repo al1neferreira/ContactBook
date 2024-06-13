@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -21,8 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +33,19 @@ class MainActivity : ComponentActivity() {
             ContactBookTheme {
 
                 val navController = rememberNavController()
-                val viewModel: ContactsViewModel = viewModel()
-
 
 
                 NavHost(navController = navController, startDestination = "contactList") {
                     composable(
                         route = "contactList"
                     ) {
-                        ContactList(navController, viewModel)
+                        ContactList(navController)
 
                     }
                     composable(
                         route = "saveContact"
                     ) {
-                        SaveContact(navController, viewModel)
+                        SaveContact(navController)
                     }
                 }
             }
