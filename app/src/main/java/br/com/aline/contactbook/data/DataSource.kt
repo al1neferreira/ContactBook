@@ -1,6 +1,5 @@
 package br.com.aline.contactbook.data
 
-import android.content.Context
 import br.com.aline.contactbook.model.Contacts
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
@@ -8,13 +7,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.LocalDateTime
 import java.util.UUID
-import javax.inject.Inject
 
-class DataSource @Inject constructor(
-    private val db: FirebaseFirestore,
-    private val context: Context
-) {
+class DataSource{
 
+    private val db = FirebaseFirestore.getInstance()
 
     private val _allContacts = MutableStateFlow<MutableList<Contacts>>(mutableListOf())
     private val allContats: StateFlow<MutableList<Contacts>> = _allContacts
@@ -40,7 +36,7 @@ class DataSource @Inject constructor(
 
 
         )
-        db.collection("contacts").document(id).set(contactsMap).addOnCompleteListener {
+        db.collection("contacts").document(name).set(contactsMap).addOnCompleteListener {
 
         }.addOnFailureListener {
 

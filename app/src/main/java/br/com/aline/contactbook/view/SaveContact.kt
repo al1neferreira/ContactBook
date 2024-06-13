@@ -27,12 +27,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
 import br.com.aline.contactbook.ui.theme.ShapeEditText
 import br.com.aline.contactbook.utils.Form
-import br.com.aline.contactbook.viewModel.ContactsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -41,8 +40,7 @@ import java.time.LocalDateTime
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SaveContact(
-    navController: NavController,
-    viewModel: ContactsViewModel = hiltViewModel()
+    navController: NavController
 ) {
 
     var name by remember { mutableStateOf("") }
@@ -54,6 +52,7 @@ fun SaveContact(
 
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val contactsRepository = ContactsRepository()
 
 
 
@@ -161,7 +160,7 @@ fun SaveContact(
                         && birthDate.isNotEmpty()
                         && uf.isNotEmpty()
                     ) {
-                        viewModel.addContact(
+                        contactsRepository.addContact(
                             name, cpf, phone.toString(),
                             birthDate.toString(),
                             uf, savedAt

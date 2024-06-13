@@ -12,9 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import br.com.aline.contactbook.ui.theme.ContactBookTheme
 import br.com.aline.contactbook.view.ContactList
 import br.com.aline.contactbook.view.SaveContact
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class MainActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)

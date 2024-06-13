@@ -46,11 +46,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.aline.contactbook.model.Contacts
+import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
-import br.com.aline.contactbook.viewModel.ContactsViewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -59,8 +58,8 @@ import br.com.aline.contactbook.viewModel.ContactsViewModel
 @Composable
 fun ContactList(
     navController: NavController,
-    viewModel: ContactsViewModel = hiltViewModel()
 ) {
+    val contactsRepository = ContactsRepository()
 
 
     Scaffold(
@@ -110,7 +109,7 @@ fun ContactList(
             ), modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp)
         ) {
 
-            val contactList = viewModel.getContacts().collectAsState(mutableListOf()).value
+            val contactList = contactsRepository.getContacts().collectAsState(mutableListOf()).value
             val context = LocalContext.current
             LazyColumn {
                 items(contactList) {
