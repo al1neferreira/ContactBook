@@ -2,13 +2,13 @@ package br.com.aline.contactbook.repository
 
 import br.com.aline.contactbook.data.DataSource
 import br.com.aline.contactbook.model.Contacts
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
-import javax.inject.Inject
 
-@ViewModelScoped
-class ContactsRepository @Inject constructor(private val dataSource: DataSource) {
+
+class ContactsRepository() {
+
+    private val dataSource= DataSource()
 
     fun addContact(
         name: String,
