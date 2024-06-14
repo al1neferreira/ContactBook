@@ -87,7 +87,7 @@ class DataSource{
                 "cpf" to cpf,
                 "phone" to phone,
                 "birthDate" to birthDate,
-                "uf" to uf,
+                "uf" to uf
                 //"createdAt" to createdAt
             )
 
