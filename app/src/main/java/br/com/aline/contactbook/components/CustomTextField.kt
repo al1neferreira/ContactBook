@@ -1,4 +1,4 @@
-package br.com.aline.contactbook.utils
+package br.com.aline.contactbook.components
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
@@ -12,7 +12,7 @@ import br.com.aline.contactbook.ui.theme.NewPurple
 import br.com.aline.contactbook.ui.theme.ShapeEditText
 
 @Composable
-fun Form(
+fun CustomTextField(
     modifier: Modifier,
     value: String,
     onValueChange: (String) -> Unit,

@@ -1,10 +1,11 @@
 package br.com.aline.contactbook.view
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,7 +13,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,38 +32,41 @@ import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
 import br.com.aline.contactbook.ui.theme.ShapeEditText
 import br.com.aline.contactbook.components.CustomTextField
+import br.com.aline.contactbook.model.Contacts
+import br.com.aline.contactbook.viewModel.ContactsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnrememberedMutableState")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SaveContact(
-    navController: NavController
-) {
+fun EditContact(
+    navController: NavController,
 
-    var name by remember { mutableStateOf("") }
-    var cpf by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
-    var birthDate by remember { mutableStateOf("") }
-    var uf by remember { mutableStateOf("") }
+) {
+    var contacts: Contacts? = null
+
+    var name by remember { mutableStateOf(contacts?.name ?: "") }
+    var cpf by remember { mutableStateOf(contacts?.cpf ?: "") }
+    var phone by remember { mutableStateOf(contacts?.phone ?: "") }
+    var birthDate by remember { mutableStateOf(contacts?.birthDate ?: "") }
+    var uf by remember { mutableStateOf(contacts?.uf ?: "") }
     var savedAt by remember { mutableStateOf(LocalDateTime.now()) }
 
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val contactsRepository = ContactsRepository()
 
-
+    val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-
+        modifier = Modifier.verticalScroll(scrollState),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Adicionar Contato",
+            text = "Editar Contato",
             fontWeight = FontWeight.Bold,
             color = NewPurple,
             fontSize = 25.sp,
@@ -76,14 +79,16 @@ fun SaveContact(
             value = name,
             onValueChange = {
                 name = it
+
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 20.dp, start = 50.dp, end = 50.dp),
             label = "Nome ",
             maxLines = 1,
-            keyboardType = KeyboardType.Text
-        )
+            keyboardType = KeyboardType.Text,
+
+            )
 
         CustomTextField(
             value = cpf,
@@ -190,10 +195,10 @@ fun SaveContact(
                 .padding(start = 55.dp, end = 55.dp, top = 10.dp)
 
         ) {
-            Text(text = "SALVAR")
+            Text(text = "ATUALIZAR")
         }
+
     }
+
+
 }
-
-
-

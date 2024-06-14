@@ -1,4 +1,4 @@
-package br.com.aline.contactbook.utils
+package br.com.aline.contactbook.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

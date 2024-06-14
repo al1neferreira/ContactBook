@@ -50,6 +50,7 @@ import androidx.navigation.NavController
 import br.com.aline.contactbook.model.Contacts
 import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
+import br.com.aline.contactbook.viewModel.ContactsViewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -58,6 +59,7 @@ import br.com.aline.contactbook.ui.theme.NewPurple
 @Composable
 fun ContactList(
     navController: NavController,
+    viewModel: ContactsViewModel
 ) {
     val contactsRepository = ContactsRepository()
 
@@ -113,7 +115,7 @@ fun ContactList(
             val context = LocalContext.current
             LazyColumn {
                 items(contactList) {
-                    ContactItem(it)
+                    ContactItem(it, navController)
                 }
             }
         }
@@ -123,7 +125,8 @@ fun ContactList(
 
 @Composable
 fun ContactItem(
-    item: Contacts
+    item: Contacts,
+    navController: NavController
 ) {
 
     var expandedCard by remember { mutableStateOf(false) }
@@ -200,7 +203,9 @@ fun ContactItem(
                     )
                 }
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        navController.navigate("editContact")
+                    },
                 ) {
                     Icon(
                         Icons.Filled.Edit,
