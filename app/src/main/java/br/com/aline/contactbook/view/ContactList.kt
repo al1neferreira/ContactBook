@@ -120,6 +120,7 @@ fun ContactList(
                         navController = navController,
                         onDelete = { contactData ->
                             viewModel.deleteContact(contactData.name!!)
+                            viewModel.getContacts()
                         }
                     )
                 }
@@ -225,16 +226,17 @@ fun ContactItem(
 
                 }
                 IconButton(onClick = {
-                    onDelete.invoke(item)
+                    onDelete(item)
 
+                    //onSuccess retorornar para a viewModel
+                    //vieModel atualizar a lista
+                    //(deletar e lista novamente)
 
                     //pegar o item - ok
                     //ter acesso ao viewModel
                     //no vm criar uma função para chamar o datasource
                     //implementar o delete
-                    //onSuccess retorornar para a viewModel
-                    //vieModel atualizar a lista
-                    //(deletar e lista novamente)
+
 
                 }) {
                     Icon(
