@@ -21,44 +21,18 @@ import br.com.aline.contactbook.viewModel.ContactsViewModel
 
 class MainActivity : ComponentActivity() {
 
-   lateinit var navController: NavHostController
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val apiKey = br.com.aline.contactbook.BuildConfig.apiKey
 
         enableEdgeToEdge()
         setContent {
             ContactBookTheme {
-
-                navController = rememberNavController()
-                val viewModel = ContactsViewModel(ContactsRepository())
+                AppNavigator(Screen.ContactList)
 
 
-                NavHost(
-                    navController = navController,
-                    startDestination = "contactList"
-                ) {
-                    composable(
-                        route = "contactList"
-                    ) {
-                        ContactList(navController, viewModel)
-
-                    }
-                    composable(
-                        route = "saveContact"
-                    ) {
-                        SaveContact(navController)
-                    }
-                    composable(
-                        route = "editContact"
-
-                    ){
-                        EditContact(navController)
-                    }
-                }
             }
         }
     }

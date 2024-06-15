@@ -32,8 +32,7 @@ import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
 import br.com.aline.contactbook.ui.theme.ShapeEditText
 import br.com.aline.contactbook.components.CustomTextField
-import br.com.aline.contactbook.model.Contacts
-import br.com.aline.contactbook.viewModel.ContactsViewModel
+import br.com.aline.contactbook.model.ContactData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -43,15 +42,15 @@ import java.time.LocalDateTime
 @Composable
 fun EditContact(
     navController: NavController,
+    contactData: ContactData
 
 ) {
-    var contacts: Contacts? = null
 
-    var name by remember { mutableStateOf(contacts?.name ?: "") }
-    var cpf by remember { mutableStateOf(contacts?.cpf ?: "") }
-    var phone by remember { mutableStateOf(contacts?.phone ?: "") }
-    var birthDate by remember { mutableStateOf(contacts?.birthDate ?: "") }
-    var uf by remember { mutableStateOf(contacts?.uf ?: "") }
+    var name by remember { mutableStateOf(contactData?.name ?: "") }
+    var cpf by remember { mutableStateOf(contactData?.cpf ?: "") }
+    var phone by remember { mutableStateOf(contactData?.phone ?: "") }
+    var birthDate by remember { mutableStateOf(contactData?.birthDate ?: "") }
+    var uf by remember { mutableStateOf(contactData?.uf ?: "") }
     var savedAt by remember { mutableStateOf(LocalDateTime.now()) }
 
     val scope = rememberCoroutineScope()
@@ -178,7 +177,7 @@ fun EditContact(
 
                 scope.launch(Dispatchers.Main) {
                     if (message) {
-                        Toast.makeText(context, "Contato adicionado!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Contato atualizado!", Toast.LENGTH_SHORT).show()
                         navController.popBackStack()
                     } else {
                         Toast.makeText(context, "Preencha todos os campos", Toast.LENGTH_SHORT)
@@ -199,6 +198,5 @@ fun EditContact(
         }
 
     }
-
 
 }

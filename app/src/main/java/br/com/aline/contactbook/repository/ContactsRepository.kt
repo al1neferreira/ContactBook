@@ -1,7 +1,7 @@
 package br.com.aline.contactbook.repository
 
 import br.com.aline.contactbook.data.DataSource
-import br.com.aline.contactbook.model.Contacts
+import br.com.aline.contactbook.model.ContactData
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
 
@@ -22,7 +22,7 @@ class ContactsRepository() {
 
     }
 
-    fun getContacts(): Flow<MutableList<Contacts>> {
+    fun getContacts(): Flow<MutableList<ContactData>> {
         return dataSource.getContacts()
 
     }

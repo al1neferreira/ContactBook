@@ -4,9 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt")
     id("com.google.gms.google-services")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-
-
-
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 android {
@@ -127,6 +125,8 @@ dependencies {
 
     // Maskara editText
     implementation("io.github.vicmikhailau:MaskedEditText:5.0.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
 }
 kapt {

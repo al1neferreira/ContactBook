@@ -42,15 +42,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.com.aline.contactbook.model.Contacts
-import br.com.aline.contactbook.repository.ContactsRepository
+import br.com.aline.contactbook.Screen
+import br.com.aline.contactbook.model.ContactData
 import br.com.aline.contactbook.ui.theme.NewPurple
 import br.com.aline.contactbook.viewModel.ContactsViewModel
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -61,8 +64,6 @@ fun ContactList(
     navController: NavController,
     viewModel: ContactsViewModel
 ) {
-    val contactsRepository = ContactsRepository()
-
 
     Scaffold(
         topBar = {
@@ -111,11 +112,16 @@ fun ContactList(
             ), modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp)
         ) {
 
-            val contactList = contactsRepository.getContacts().collectAsState(mutableListOf()).value
-            val context = LocalContext.current
+            val contactList = viewModel.allContats.collectAsState(mutableListOf()).value
+            viewModel.getContacts()
             LazyColumn {
                 items(contactList) {
-                    ContactItem(it, navController)
+                    ContactItem(item = it,
+                        navController = navController,
+                        onDelete = { contactData ->
+                            viewModel.deleteContact(contactData.name!!)
+                        }
+                    )
                 }
             }
         }
@@ -123,10 +129,12 @@ fun ContactList(
 }
 
 
+@OptIn(ExperimentalEncodingApi::class)
 @Composable
 fun ContactItem(
-    item: Contacts,
-    navController: NavController
+    item: ContactData,
+    navController: NavController,
+    onDelete: (ContactData) -> Unit
 ) {
 
     var expandedCard by remember { mutableStateOf(false) }
@@ -204,7 +212,9 @@ fun ContactItem(
                 }
                 IconButton(
                     onClick = {
-                        navController.navigate("editContact")
+                        val modelJson = Json.encodeToString(item)
+                        val encodedModel = Base64.UrlSafe.encode(modelJson.toByteArray())
+                        navController.navigate("${Screen.EditContact.route}/$encodedModel")
                     },
                 ) {
                     Icon(
@@ -214,7 +224,19 @@ fun ContactItem(
                     )
 
                 }
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    onDelete.invoke(item)
+
+
+                    //pegar o item - ok
+                    //ter acesso ao viewModel
+                    //no vm criar uma função para chamar o datasource
+                    //implementar o delete
+                    //onSuccess retorornar para a viewModel
+                    //vieModel atualizar a lista
+                    //(deletar e lista novamente)
+
+                }) {
                     Icon(
                         Icons.Filled.Delete,
                         "Delete Contact",
@@ -228,6 +250,7 @@ fun ContactItem(
         }
     }
 }
+
 
 
 

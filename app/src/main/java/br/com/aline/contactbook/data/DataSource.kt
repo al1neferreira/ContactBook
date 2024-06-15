@@ -1,6 +1,6 @@
 package br.com.aline.contactbook.data
 
-import br.com.aline.contactbook.model.Contacts
+import br.com.aline.contactbook.model.ContactData
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,8 +12,8 @@ class DataSource{
 
     private val db = FirebaseFirestore.getInstance()
 
-    private val _allContacts = MutableStateFlow<MutableList<Contacts>>(mutableListOf())
-    private val allContats: StateFlow<MutableList<Contacts>> = _allContacts
+    private val _allContacts = MutableStateFlow<MutableList<ContactData>>(mutableListOf())
+    private val allContats: StateFlow<MutableList<ContactData>> = _allContacts
 
     fun addContact(
         name: String,
@@ -43,13 +43,13 @@ class DataSource{
         }
     }
 
-    fun getContacts(): Flow<MutableList<Contacts>> {
+    fun getContacts(): Flow<MutableList<ContactData>> {
 
-        val contactList: MutableList<Contacts> = mutableListOf()
+        val contactList: MutableList<ContactData> = mutableListOf()
         db.collection("contacts").get().addOnCompleteListener { querySnapshot ->
             if (querySnapshot.isSuccessful) {
                 for (document in querySnapshot.result) {
-                    val contact = document.toObject(Contacts::class.java)
+                    val contact = document.toObject(ContactData::class.java)
                     contactList.add(contact)
                     _allContacts.value = contactList
                 }
