@@ -50,7 +50,14 @@ class ContactsViewModel(
         }
     }
 
-    fun updateContact(name: String, cpf:String, phone:String, birthDate:String, uf: String, createdAt: Date) {
+    fun updateContact(
+        name: String,
+        cpf: String,
+        phone: String,
+        birthDate: String,
+        uf: String,
+        createdAt: LocalDateTime
+    ) {
         viewModelScope.launch {
             contactsRepository.updateContact(name, cpf, phone, birthDate, uf, createdAt.toString())
 

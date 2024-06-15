@@ -46,7 +46,7 @@ fun AppNavigator(initialScreen:Screen) {
         composable(
             Screen.SaveContact.route
         ) {
-            SaveContact(navController)
+            SaveContact(navController, viewModel)
         }
         composable(
             Screen.EditContact.route +"/{contactData}",

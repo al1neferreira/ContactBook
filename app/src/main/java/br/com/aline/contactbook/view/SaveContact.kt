@@ -1,5 +1,6 @@
 package br.com.aline.contactbook.view
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -32,15 +33,23 @@ import br.com.aline.contactbook.repository.ContactsRepository
 import br.com.aline.contactbook.ui.theme.NewPurple
 import br.com.aline.contactbook.ui.theme.ShapeEditText
 import br.com.aline.contactbook.components.CustomTextField
+import br.com.aline.contactbook.model.ContactData
+import br.com.aline.contactbook.utils.Validation
+import br.com.aline.contactbook.viewModel.ContactsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalDateTime
 
+
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SaveContact(
-    navController: NavController
+    navController: NavController,
+    viewModel: ContactsViewModel
+
 ) {
 
     var name by remember { mutableStateOf("") }
@@ -50,11 +59,14 @@ fun SaveContact(
     var uf by remember { mutableStateOf("") }
     var savedAt by remember { mutableStateOf(LocalDateTime.now()) }
 
+    var nameError by mutableStateOf(false)
+    var ufError by mutableStateOf(false)
+    var birthDateError by mutableStateOf(false)
+    var phoneError by mutableStateOf(false)
+
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val contactsRepository = ContactsRepository()
-
-
+    var contacts: ContactData? = null
 
     Column(
         modifier = Modifier
@@ -141,8 +153,76 @@ fun SaveContact(
 
         //RegionDropdownMenu { regionContact = it }
 
+        fun isAnyChangeAvailable(
+            name: String,
+            cpf: String,
+            phone: String,
+            birthDate: String,
+            uf: String
+        ): Boolean {
+            if (
+                name?.equals(contacts?.name) == true &&
+                cpf?.equals(contacts?.cpf) == true &&
+                phone?.equals(contacts?.phone) == true &&
+                uf?.equals(contacts?.uf) == true &&
+                birthDate?.equals(contacts?.birthDate) == true
+            ) {
+                return false
+            }
+            return true
+        }
+
+        fun isContactValid(
+            name: String,
+            cpf: String,
+            phone: String,
+            birthDate: String,
+            uf: String
+        ): Boolean {
+            return Validation(
+                context = context,
+                name = name,
+                cpf = cpf,
+                phone = phone,
+                birthDate = birthDate,
+                uf = uf
+            ).run {
+                isNameValid().also {
+                    nameError = !it
+                } && isUfValid().also {
+                    ufError = !it
+                } && isBirthDateValid().also {
+                    birthDateError = !it
+
+                } && isPhoneValid().also {
+                    phoneError = !it
+                } && isAnyChangeAvailable(
+                    name = name,
+                    cpf = cpf,
+                    phone = phone,
+                    birthDate = birthDate,
+                    uf = uf
+                )
+
+            }
+        }
+
         Button(
             onClick = {
+                if (!isContactValid(
+                        name,
+                        cpf,
+                        phone,
+                        birthDate,
+                        uf
+                    )
+                ) return@Button
+
+                viewModel.addContact(
+                    name = name, cpf = cpf, phone = phone,
+                    birthDate = birthDate, uf = uf, savedAt
+                )
+
                 var message = true
 
                 scope.launch(Dispatchers.IO) {
@@ -151,20 +231,11 @@ fun SaveContact(
                         || uf.isEmpty()
                         || birthDate.isEmpty()
                     ) {
-                        message = false
 
-                    } else if (
-                        name.isNotEmpty()
-                        && phone.isNotEmpty()
-                        && birthDate.isNotEmpty()
-                        && uf.isNotEmpty()
-                    ) {
-                        contactsRepository.addContact(
-                            name, cpf, phone.toString(),
-                            birthDate.toString(),
-                            uf, savedAt
-                        )
-                        message = true
+
+                    } else {
+
+                        message = false
 
                     }
 
@@ -192,6 +263,7 @@ fun SaveContact(
         ) {
             Text(text = "SALVAR")
         }
+
     }
 }
 
