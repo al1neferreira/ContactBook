@@ -2,7 +2,7 @@ package br.com.aline.contactbook.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.aline.contactbook.model.Contacts
+import br.com.aline.contactbook.model.ContactData
 import br.com.aline.contactbook.repository.ContactsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,8 +16,8 @@ class ContactsViewModel(
     private val contactsRepository: ContactsRepository
 ):ViewModel() {
 
-    private val _allContacts = MutableStateFlow<MutableList<Contacts>>(mutableListOf())
-    private val allContats: StateFlow<MutableList<Contacts>> = _allContacts
+    private val _allContacts = MutableStateFlow<MutableList<ContactData>>(mutableListOf())
+    val allContats: StateFlow<MutableList<ContactData>> = _allContacts
 
     private val _contact = MutableStateFlow("")
     private val contact: StateFlow<String> = _contact
@@ -35,13 +35,12 @@ class ContactsViewModel(
         }
     }
 
-    fun getContacts(): Flow<MutableList<Contacts>> {
+    fun getContacts(): Flow<MutableList<ContactData>> {
         viewModelScope.launch {
             contactsRepository.getContacts().collect {
                 _allContacts.value = it
             }
         }
-
         return allContats
     }
 
@@ -57,4 +56,5 @@ class ContactsViewModel(
 
         }
     }
+
 }
