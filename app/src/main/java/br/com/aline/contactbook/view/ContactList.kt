@@ -228,15 +228,6 @@ fun ContactItem(
                 IconButton(onClick = {
                     onDelete(item)
 
-                    //onSuccess retorornar para a viewModel
-                    //vieModel atualizar a lista
-                    //(deletar e lista novamente)
-
-                    //pegar o item - ok
-                    //ter acesso ao viewModel
-                    //no vm criar uma função para chamar o datasource
-                    //implementar o delete
-
 
                 }) {
                     Icon(
