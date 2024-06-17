@@ -15,7 +15,7 @@ class Validation(
 
     fun isNameValid(name: String? = this.name): Boolean {
         if (name == null||name.trim().isEmpty()) {
-            Toast.makeText(context, "Por favor, insira o seu nome e sobrenome", Toast.LENGTH_SHORT)
+            Toast.makeText(context, "Insira o seu nome e sobrenome", Toast.LENGTH_SHORT)
                 .show()
             return false
         }
@@ -30,9 +30,9 @@ class Validation(
         return true
     }
 
-    fun isBirthDateValid(birthDate: String? = this.birthDate): Boolean {
+    fun isBirthDateValid(birthDate: String? = this.birthDate, uf: String? = this.uf): Boolean {
         if (birthDate != null) {
-            if (birthDate <= 2006.toString()) {
+            if (birthDate <= 2006.toString()&& uf == "MG") {
                 Toast.makeText(context, "Cadastro não permitido", Toast.LENGTH_SHORT).show()
                 return false
             }
@@ -43,7 +43,7 @@ class Validation(
     fun isPhoneValid(phone: String? = this.phone): Boolean {
         if (phone != null) {
             if (phone.trim().isEmpty()) {
-                Toast.makeText(context, "Please enter a phone number", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Insira um número de telefone", Toast.LENGTH_SHORT).show()
                 return false
             }
         }
