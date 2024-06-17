@@ -12,7 +12,7 @@ Aplicativo de lista de contatos em Jetpack Compose com armazenamento de informa�
 <img src="app/src/screens/add-contact-screen.gif" width="250">&emsp;<img src="app/src/screens/update-video.gif" width="250">&emsp;<img src="app/src/screens/delete-contact-video.gif" width="250">
 
 ## :white_check_mark: Validações de cadastro
-<img src="app/src/screens/close-form-mg-video.gif" width="300">&emsp;<img src="app/src/screens/cpf-form-video.gif" width="300">
+<img src="app/src/screens/close-form-mg-video.gif" width="400">&emsp;<img src="app/src/screens/cpf-form-video.gif" width="400">
 
 
 
