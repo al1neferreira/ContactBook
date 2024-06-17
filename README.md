@@ -8,8 +8,11 @@ Aplicativo de lista de contatos em Jetpack Compose com armazenamento de informa�
 ## :file_folder: Firebase + data de criação
 <img src="app/src/screens/firebase1.png" width="800"> 
 
-## :movie_camera: Video
-<img src="app/src/screens/add-contact-screen.gif" width="250">&emsp;<img src="app/src/screens/gif/update.gif" width="250">&emsp;<img src="app/src/screens/gif/delete.gif" width="250">
+## :movie_camera: CRUD
+<img src="app/src/screens/add-contact-screen.gif" width="250">&emsp;<img src="app/src/screens/update-video.gif" width="250">&emsp;<img src="app/src/screens/delete-contact-video.gif" width="250">
+
+## :white_check_mark: Validações de cadastro
+<img src="app/src/screens/close-form-mg-video.gif" width="300">&emsp;<img src="app/src/screens/cpf-form-video.gif" width="300">
 
 
 
