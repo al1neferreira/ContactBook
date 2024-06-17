@@ -18,11 +18,21 @@ Aplicativo de lista de contatos em Jetpack Compose com armazenamento de informa√
 
 ## Tecnologias
 * Kotlin
-* MVVM
 * Jetpack Compose
+* StateFlow
+* LiveData
 * Async
 * Coroutines
-* Room Database
+* Firebase
+* Navigator
+* NavHost + NavController
+* EncodeModel + DecodeModel para transmitir dados entre telas
+
+- Components de UI
+    - Material 3
+    - Custom Text Field
+    - Custom Shape
+    - Toast para display de mensagens
 
   
 ## Author
