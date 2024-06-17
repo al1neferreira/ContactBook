@@ -1,5 +1,5 @@
 # ContactBook
-Aplicativo de lista de contatos em Jetpack Compose com armazenamento de informações em banco de dados remoto. 
+Aplicativo Android nativo de lista de contatos em Jetpack Compose com armazenamento de informações em banco de dados remoto. 
 
 ## :camera_flash: Screenshots
 
