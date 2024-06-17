@@ -22,7 +22,6 @@ Aplicativo Android nativo de lista de contatos em Jetpack Compose com armazename
 * Kotlin
 * Jetpack Compose
 * StateFlow
-* LiveData
 * Async
 * Coroutines
 * Firebase
