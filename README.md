@@ -3,7 +3,9 @@ Aplicativo Android nativo de lista de contatos em Jetpack Compose com armazename
 
 ## :camera_flash: Screenshots
 
-<img src="app/src/screens/contact-list.png" width="400">&emsp;<img src="app/src/screens/emptyState.png" width="400"> 
+<img src="app/src/screens/card-animation.gif" width="400">&emsp;<img src="app/src/screens/emptyState.png" width="400"> 
+
+
 
 ## :file_folder: Firebase + data de criação
 <img src="app/src/screens/firebase1.png" width="800"> 
